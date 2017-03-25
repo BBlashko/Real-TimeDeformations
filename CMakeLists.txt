@@ -10,4 +10,4 @@ project(Real-TimeDeformations LANGUAGES  CXX)
 add_subdirectory(atlas)
 include_directories(${ATLAS_INCLUDE_DIRS})
 
-add_subdirectory(project)
+add_subdirectory(real_time_deformations)

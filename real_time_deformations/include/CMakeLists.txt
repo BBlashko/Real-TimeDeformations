@@ -1,0 +1,4 @@
+set(PROJECT_INCLUDE_FILES
+	"${PROJECT_INCLUDE}/deformationscene.hpp"
+	PARENT_SCOPE
+)

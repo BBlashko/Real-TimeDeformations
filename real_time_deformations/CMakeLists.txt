@@ -15,5 +15,5 @@ source_group("shaders" FILES ${PROJECT_SHADER_FILES})
 source_group("source" FILES ${PROJECT_SOURCE_FILES})
 
 include_directories(${PROJECT_INCLUDE})
-add_executable(project ${PROJECT_SOURCE_FILES} ${PROJECT_INCLUDE_FILES} ${PROJECT_SHADER_FILES})
-target_link_libraries(project ${ATLAS_LIBRARIES})
+add_executable(real_time_deformations ${PROJECT_SOURCE_FILES} ${PROJECT_INCLUDE_FILES} ${PROJECT_SHADER_FILES})
+target_link_libraries(real_time_deformations ${ATLAS_LIBRARIES})

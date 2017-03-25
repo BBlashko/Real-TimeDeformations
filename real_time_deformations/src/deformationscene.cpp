@@ -1,12 +1,12 @@
-#include "deformationScene.hpp"
+#include <atlas\utils\GUI.hpp>
 
-namespace project
+#include <deformationscene.hpp>
+
+namespace rt_deformations
 {
-    using  Vector3 = atlas::math::Vector;
-    DeformationScene::DeformationScene()
-    {}
+    deformation_scene::deformation_scene() {}
 
-    void DeformationScene::renderScene()
+    void deformation_scene::renderScene()
     {
         atlas::utils::Gui::getInstance().newFrame();
         const float grey = 161.0f / 255.0f;
