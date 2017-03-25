@@ -1,12 +1,9 @@
-#include <iostream>
-
 #include <atlas\gl\ErrorCheck.hpp>
 #include <atlas\utils\Application.hpp>
 #include <atlas\utils\Utils.hpp>
 #include <atlas\utils\WindowSettings.hpp>
-#include <atlas\tools\ModellingScene.hpp>
 
-#include "deformationScene.hpp"
+#include <deformationscene.hpp>
 
 // Configure the settings we need to create an openGL context
 atlas::utils::WindowSettings config_window_settings() {
@@ -24,10 +21,9 @@ int main(void) {
 
     atlas::gl::setGLErrorSeverity(ATLAS_GL_ERROR_SEVERITY_HIGH | ATLAS_GL_ERROR_SEVERITY_MEDIUM);
 
-
     //Create window
     atlas::utils::Application::getInstance().createWindow(window_settings);
-    atlas::utils::Application::getInstance().addScene(atlas::utils::ScenePointer(new project::DeformationScene()));
+    atlas::utils::Application::getInstance().addScene(atlas::utils::ScenePointer(new rt_deformations::deformation_scene()));
     atlas::utils::Application::getInstance().runApplication();
 
     return 0;
