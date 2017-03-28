@@ -5,5 +5,7 @@ set(PROJECT_INCLUDE_FILES
 	"${PROJECT_INCLUDE}/imguiwrapper.hpp"
 	"${PROJECT_INCLUDE}/image.hpp"
 	"${PROJECT_INCLUDE}/handle.hpp"
+	"${PROJECT_INCLUDE}/handlerenderer.hpp"
+	"${PROJECT_INCLUDE}/pointhandle.hpp"
 	PARENT_SCOPE
 )

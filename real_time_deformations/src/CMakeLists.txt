@@ -3,5 +3,8 @@ set(PROJECT_SOURCE_FILES
 	"${PROJECT_SOURCE}/imguiwrapper.cpp"
 	"${PROJECT_SOURCE}/main.cpp"
 	"${PROJECT_SOURCE}/image.cpp"
+	"${PROJECT_SOURCE}/handle.cpp"
+	"${PROJECT_SOURCE}/handlerenderer.cpp"
+	"${PROJECT_SOURCE}/pointhandle.cpp"
 	PARENT_SCOPE
 )
