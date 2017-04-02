@@ -1,6 +1,7 @@
 #pragma once
 
 #include <atlas/tools/ModellingScene.hpp>
+#include "image.hpp"
 
 namespace rt_deformations
 {
@@ -10,5 +11,6 @@ namespace rt_deformations
         deformation_scene::deformation_scene();
         void deformation_scene::renderScene() override;
     private:
+        image _image;
     };
 }
