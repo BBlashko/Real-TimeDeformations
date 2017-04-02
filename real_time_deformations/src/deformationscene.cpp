@@ -1,12 +1,15 @@
 #include <atlas\utils\GUI.hpp>
-
 #include <deformationscene.hpp>
 #include <handle.hpp>
+#include <limits>
 #include <pointhandle.hpp>
 
 namespace rt_deformations
 {
-	deformation_scene::deformation_scene() : _temp(atlas::math::Point(0, 0, 0)) {}
+	deformation_scene::deformation_scene()
+		: _temp(atlas::math::Point(0.0f, 0.0f, 0.0f)),
+		_selected_point(-1)
+		{}
 
 	void deformation_scene::mousePressEvent(
 		int button, int action, int modifiers,
@@ -20,13 +23,38 @@ namespace rt_deformations
 		GLint screen_width = viewport[2];
 		GLint screen_height = viewport[3];
 
-		if (_edit_mode) {
-			float new_x = ((float)xPos / screen_width) * 2 - 1;
-			float new_y = ((float)yPos / screen_height) * -2 + 1;
+		if (button == GLFW_MOUSE_BUTTON_LEFT) {
+			if (action == GLFW_PRESS) {
+				auto new_point = glm::unProject(
+					atlas::math::Point(xPos, screen_height - yPos, 0.0f),
+					mView, mProjection,
+					atlas::math::Point4(0, 0, screen_width, screen_height)
+					);
 
-			// Place our point
+				if (_temp.intersect(new_point)) {
+					_temp.set_selected(true);
+				}
+			} else if (action == GLFW_RELEASE){
+				_temp.set_selected(false);
+				_selected_point = -1;
+			}
 		}
-		
+	}
+
+	void deformation_scene::mouseMoveEvent(double xPos, double yPos) {
+		GLint viewport[4];
+		glGetIntegerv(GL_VIEWPORT, viewport);
+		GLint screen_width = viewport[2];
+		GLint screen_height = viewport[3];
+
+		if (_temp.selected()) {
+			auto new_point = glm::unProject(
+				atlas::math::Point(xPos, screen_height-yPos, 0.0f),
+				mView, mProjection,
+				atlas::math::Point4(0, 0, screen_width, screen_height)
+				);
+			_temp.set_point(new_point);
+		}
 	}
 
 	void deformation_scene::renderScene()
@@ -38,7 +66,7 @@ namespace rt_deformations
 
 		mProjection = glm::perspective(
 			glm::radians(mCamera.getCameraFOV()),
-			(float)mWidth / mHeight, 1.0f, 1000000.0f);
+			(float)mWidth / mHeight, 2.0f, 1000000.0f);
 
 		mUniformMatrixBuffer.bindBuffer();
         mUniformMatrixBuffer.bufferSubData(0, sizeof(atlas::math::Matrix4),
@@ -55,7 +83,7 @@ namespace rt_deformations
             mGrid.renderGeometry(mProjection, mView);
         }
 
-		_temp.renderGeometry();
+		_temp.renderGeometry(mProjection, mView);
 
         ImGui::SetNextWindowSize(ImVec2(400, 200), ImGuiSetCond_FirstUseEver);
         ImGui::Begin("Deformations HUD");
@@ -64,8 +92,6 @@ namespace rt_deformations
         {
             mCamera.resetCamera();
         }
-
-
 
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f /
             ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
