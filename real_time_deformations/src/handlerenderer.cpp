@@ -1,6 +1,8 @@
 #include <environment.hpp>
 #include <handlerenderer.hpp>
 
+#include <iostream>
+
 namespace rt_deformations {
 
 	handle_renderer::handle_renderer()
@@ -69,6 +71,7 @@ namespace rt_deformations {
 	void handle_renderer::buffer_data() {
 
 		auto points = flatten_point_data();
+		std::cout << points.size() << std::endl;
 
 		_vao.bindVertexArray();
 		_buffer.bindBuffer();
@@ -93,6 +96,15 @@ namespace rt_deformations {
 		_size = result.size();
 
 		return result;
+	}
+
+	void handle_renderer::update_handle(int handle_index, atlas::math::Point p) {
+		if (handle_index >= 0 && handle_index < _handles.size()) {
+			auto h = _handles.at(handle_index);
+			h->set_point(p);
+		}
+
+		buffer_data();
 	}
 
 	std::vector<handle*> handle_renderer::handles() {

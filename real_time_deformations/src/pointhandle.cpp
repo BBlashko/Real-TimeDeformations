@@ -21,13 +21,10 @@ namespace rt_deformations {
 	}
 
 	bool point_handle::intersect(atlas::math::Point p) {
-
 		float delta_x = abs(abs(p.x) - abs(_p.x));
 		float delta_y = abs(abs(p.y) - abs(_p.y));
 
-		//std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl;
-
-		return delta_x <= _rp_size && delta_y <= _rp_size;
+		return delta_x <= handle::_rp_size && delta_y <= handle::_rp_size;
 	}
 
 	void point_handle::set_selected(bool selected) {

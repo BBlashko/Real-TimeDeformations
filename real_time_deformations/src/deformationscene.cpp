@@ -39,20 +39,17 @@ namespace rt_deformations
 
 				if (!edit_mode()) {
 
-					std::cout << "It's broken" << std::endl;
-
 					for (auto h : _hr.handles()) {
-						//if (h->intersect(new_point)) {
+						if (h->intersect(new_point)) {
 							// When we do more than regular handles,
 							// well will handle this case
-						//	h->set_selected(true);
-						//}
+							h->set_selected(true);
+						}
 					}
-					std::cout << "It's not broken" << std::endl;
 
 				}
 				else {
-					_hr.add_handle(&point_handle(new_point));
+					_hr.add_handle(new point_handle(new_point));
 					_add_point_handle_mode = false;
 				}
 			} else if (action == GLFW_RELEASE){
@@ -72,15 +69,19 @@ namespace rt_deformations
 		glGetIntegerv(GL_VIEWPORT, viewport);
 		GLint screen_width = viewport[2];
 		GLint screen_height = viewport[3];
+		auto handles = _hr.handles();
+		for (unsigned i = 0; i < handles.size(); ++i) {
+			auto h = handles.at(i);
+			if (h->selected()) {
+				auto new_point = glm::unProject(
+					atlas::math::Point(xPos, screen_height - yPos, 0.0f),
+					mView, mProjection,
+					atlas::math::Point4(0, 0, screen_width, screen_height)
+					);
 
-		//if (_temp.selected()) {
-			auto new_point = glm::unProject(
-				atlas::math::Point(xPos, screen_height-yPos, 0.0f),
-				mView, mProjection,
-				atlas::math::Point4(0, 0, screen_width, screen_height)
-				);
-		//	_temp.set_point(new_point);
-		//}
+				_hr.update_handle(i, new_point);
+			}
+		}
 	}
 
 	void deformation_scene::renderScene()
@@ -110,6 +111,11 @@ namespace rt_deformations
         }
 
 		_hr.renderGeometry(mProjection, mView);
+
+		/*if (_hr.handles().size() > 0) {
+			auto _p = _hr.handles().at(0)->data().at(0);
+			std::cout << "(" << _p.x << ", " << _p.y << ", " << _p.z << ")" << std::endl;
+		}*/
 
 		// Application interface
 

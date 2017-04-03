@@ -13,11 +13,11 @@ namespace rt_deformations {
 
 		virtual atlas::math::Matrix4 generate_transformations() override;
 
-		bool selected();
+		virtual bool selected() override;
 
 		virtual bool intersect(atlas::math::Point p) override;
 
-		void set_point(atlas::math::Point p);
+		virtual void set_point(atlas::math::Point p) override;
 
 		virtual void set_selected(bool selected) override;
 
