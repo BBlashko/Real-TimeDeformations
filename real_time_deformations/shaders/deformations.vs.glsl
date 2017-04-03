@@ -8,6 +8,10 @@ uniform mat4 model;
 out vec2 fTexcoord;
 void main()
 {
+<<<<<<< HEAD
     fTexcoord = vTexcoord;
     gl_Position = projection * view * model * vec4(vPosition, 1.0);
+=======
+    gl_Position = vec4(vPosition, 1.0);
+>>>>>>> tree demo
 }

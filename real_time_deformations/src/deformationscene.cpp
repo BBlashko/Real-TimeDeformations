@@ -13,7 +13,8 @@ namespace rt_deformations
 		_add_skeleton_handle_mode(false),
 		_add_cage_handle_mode(false),
 		_selected_handle(-1),
-		_image("images/siimba_2.png")
+		_image("images/simba.png"),
+		_tree(0)
 		{}
 
 	void deformation_scene::mousePressEvent(
@@ -32,11 +33,15 @@ namespace rt_deformations
 		if (button == GLFW_MOUSE_BUTTON_LEFT) {
 			if (action == GLFW_PRESS) {
 
-				auto new_point = glm::unProject(
+				/*auto new_point = glm::unProject(
 					atlas::math::Point(xPos, screen_height - yPos, 0.0f),
 					mView, mProjection,
 					atlas::math::Point4(0, 0, screen_width, screen_height)
-					);
+					);*/
+				float new_x = ((float)xPos / screen_width) * 2 - 1;
+				float new_y = ((float)yPos / screen_height) * -2 + 1;
+				atlas::math::Point new_point(new_x, new_y, 0);
+
 
 				if (!edit_mode()) {
 					auto handles = _hr.handles();
@@ -74,11 +79,14 @@ namespace rt_deformations
 		for (unsigned i = 0; i < handles.size(); ++i) {
 			auto h = handles.at(i);
 			if (h->selected()) {
-				auto new_point = glm::unProject(
+				/*auto new_point = glm::unProject(
 					atlas::math::Point(xPos, screen_height - yPos, 0.0f),
 					mView, mProjection,
 					atlas::math::Point4(0, 0, screen_width, screen_height)
-					);
+					);*/
+				float new_x = ((float)xPos / screen_width) * 2 - 1;
+				float new_y = ((float)yPos / screen_height) * -2 + 1;
+				atlas::math::Point new_point(new_x, new_y, 0);
 
 				_hr.update_handle(i, new_point);
 			}
@@ -158,6 +166,17 @@ namespace rt_deformations
         //Handles
         ImGui::Text("Handles:");
         ImGui::BeginChild("Handles:", ImVec2(295, 100), true);
+		_tree.resetGeometry();
+		_tree.generate_output_string(2, 0);
+
+		for (auto h : _hr.handles()) {
+			_tree.transformGeometry(h->generate_transformations());
+		}
+
+		_tree.renderGeometry(1);
+
+		// Application interface
+		
         _hr.renderGeometry(mProjection, mView);	
 
 		// Handle Editor

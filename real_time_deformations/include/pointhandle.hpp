@@ -26,6 +26,7 @@ namespace rt_deformations {
 		atlas::math::Point _p;
 	private:
 		bool _s;
+		atlas::math::Point _o;
 	};
 
 }

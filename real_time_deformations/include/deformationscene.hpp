@@ -4,6 +4,7 @@
 #include "image.hpp"
 #include <handle.hpp>
 #include <handlerenderer.hpp>
+#include <pythagorastree.hpp>
 #include <vector>
 
 namespace rt_deformations
@@ -29,6 +30,7 @@ namespace rt_deformations
 		bool _add_cage_handle_mode;
 		handle_renderer _hr;
 		int _selected_handle;
+		a3::pythagoras_tree _tree;
 
 		image _image;
 		bool edit_mode();
