@@ -6,14 +6,17 @@ namespace rt_deformations {
 
 	point_handle::point_handle(atlas::math::Point point)
 		: _p(point),
-		_s(false)
+		_s(false),
+		_o(point)
 	{}
 
 	point_handle::~point_handle() {}
 
 	atlas::math::Matrix4 point_handle::generate_transformations()
 	{
-		return atlas::math::Matrix4(1.0f);
+		auto x = _p.x - _o.x;
+		auto y = _p.y - _o.y;
+		return glm::translate(atlas::math::Matrix4(1.0f), atlas::math::Point(x, y, 0.0f));
 	}
 
 	void point_handle::set_point(atlas::math::Point p) {
