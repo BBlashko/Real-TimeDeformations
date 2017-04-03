@@ -38,17 +38,17 @@ namespace rt_deformations
 					);
 
 				if (!edit_mode()) {
-
-					for (auto h : _hr.handles()) {
+					auto handles = _hr.handles();
+					for (unsigned i = 0; i < handles.size(); ++i) {
+						auto h = handles.at(i);
 						if (h->intersect(new_point)) {
 							// When we do more than regular handles,
 							// well will handle this case
 							h->set_selected(true);
+							_selected_handle = i;
 						}
 					}
-
-				}
-				else {
+				} else {
 					_hr.add_handle(new point_handle(new_point));
 					_add_point_handle_mode = false;
 				}

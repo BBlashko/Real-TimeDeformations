@@ -71,7 +71,6 @@ namespace rt_deformations {
 	void handle_renderer::buffer_data() {
 
 		auto points = flatten_point_data();
-		std::cout << points.size() << std::endl;
 
 		_vao.bindVertexArray();
 		_buffer.bindBuffer();
