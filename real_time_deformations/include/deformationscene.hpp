@@ -1,8 +1,9 @@
 #pragma once
 
 #include <atlas/tools/ModellingScene.hpp>
+#include <handle.hpp>
+#include <handlerenderer.hpp>
 #include <vector>
-#include <pointhandle.hpp>
 
 namespace rt_deformations
 {
@@ -22,10 +23,12 @@ namespace rt_deformations
 
 	private:
 		/* Determine if the user is adding a handle or not */
-		bool _edit_mode;
-		point_handle _temp;
-		int _last_x;
-		int _last_y;
-		int _selected_point;
+		bool _add_point_handle_mode;
+		bool _add_skeleton_handle_mode;
+		bool _add_cage_handle_mode;
+		handle_renderer _hr;
+		int _selected_handle;
+
+		bool edit_mode();
 	};
 }
