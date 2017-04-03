@@ -17,6 +17,7 @@ namespace rt_deformations {
 			atlas::math::Matrix4 const& view) override;
 
 		void add_handle(handle* h);
+		void pop_handle(int index);
 		void update_handle(int handle_index, atlas::math::Point p);
 
 		std::vector<handle*> handles();

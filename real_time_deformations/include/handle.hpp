@@ -20,6 +20,4 @@ namespace rt_deformations {
 		const static float _rp_size;
 	};
 
-	//const float handle::_p_size = 2.0f;
-	//const float handle::_rp_size = _p_size / 1000.0f;
 }

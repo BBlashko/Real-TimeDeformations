@@ -112,11 +112,6 @@ namespace rt_deformations
 
 		_hr.renderGeometry(mProjection, mView);
 
-		/*if (_hr.handles().size() > 0) {
-			auto _p = _hr.handles().at(0)->data().at(0);
-			std::cout << "(" << _p.x << ", " << _p.y << ", " << _p.z << ")" << std::endl;
-		}*/
-
 		// Application interface
 
 		// Camera Controls
@@ -143,9 +138,10 @@ namespace rt_deformations
 			ImGui::EndMenu();
 		}
 
-		ImGui::Combo("", &delete_handle_index, "None\0P1\0P2\0P3\0P4\0\0");
+		ImGui::Combo("", &delete_handle_index, "None\0P1\0P2\0\0");
 		ImGui::SameLine();
 		if (ImGui::Button("Delete")) {
+			_hr.pop_handle(delete_handle_index);
 		}
 
 		if (edit_mode()) {

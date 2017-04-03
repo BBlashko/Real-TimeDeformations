@@ -68,6 +68,15 @@ namespace rt_deformations {
 		buffer_data();
 	}
 
+	void handle_renderer::pop_handle(int index) {
+		index -= 1;
+		if (index >= 0 && index < _handles.size()) {
+			_handles.erase(_handles.begin() + index);
+		}
+
+		buffer_data();
+	}
+
 	void handle_renderer::buffer_data() {
 
 		auto points = flatten_point_data();
