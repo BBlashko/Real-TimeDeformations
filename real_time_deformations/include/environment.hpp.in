@@ -3,8 +3,6 @@
 #include <string>
 
 namespace rt_deformations {
-
-<<<<<<< HEAD
     std::string get_shader_path()
     {
         return "@PROJECT_SHADERS@";
@@ -14,13 +12,4 @@ namespace rt_deformations {
     {
         return "@PROJECT_IMAGES@";
     }
-
 }
-=======
-	std::string get_shader_path()
-	{
-		return "@PROJECT_SHADERS@";
-	}
-
-}
->>>>>>> basic handle movement

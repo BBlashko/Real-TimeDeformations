@@ -3,6 +3,7 @@
 
 ## cmake
 *_build
+**environment.hpp
 
 ## Atlas
 atlas
