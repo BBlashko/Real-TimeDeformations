@@ -87,7 +87,7 @@ namespace a3 {
 			this->_indicies = std::get<1>(data);
 		}
 
-		glUniform4f(this->mUniforms["color"], 1.0f, 1.0f, 1.0f, 1.0f);
+		glUniform4f(this->mUniforms["color"], 0.0f, 0.0f, 0.0f, 1.0f);
 		this->_vertex_vao.bindVertexArray();
 
 		if (_transformed_vertices.size() == 0) {
